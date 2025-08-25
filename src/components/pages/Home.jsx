@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { toast } from "react-toastify";
 import { tripService } from "@/services/api/tripService";
+import { sortTripsByStatus } from "@/utils/dateUtils";
 import ApperIcon from "@/components/ApperIcon";
 import TripCard from "@/components/molecules/TripCard";
 import NewTripForm from "@/components/organisms/NewTripForm";
@@ -36,8 +37,7 @@ const [showNewTripForm, setShowNewTripForm] = useState(false);
   }, []);
 
   useEffect(() => {
-    if (trips.length > 0) {
-      const { sortTripsByStatus } = require('@/utils/dateUtils');
+if (trips.length > 0) {
       setSortedTrips(sortTripsByStatus(trips));
     } else {
       setSortedTrips([]);

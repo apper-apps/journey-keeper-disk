@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import React from "react";
 import { formatCurrency, getStatusColor } from "@/utils/formatUtils";
-import { formatDate, getTripDuration } from "@/utils/dateUtils";
+import { formatDate, getTripDuration, getTripStatus } from "@/utils/dateUtils";
 import ApperIcon from "@/components/ApperIcon";
 import Budget from "@/components/pages/Budget";
 
@@ -32,9 +32,7 @@ const TripCard = ({ trip }) => {
   const budgetUsed = trip.actualSpent > 0 
     ? ((trip.actualSpent / trip.totalBudget) * 100).toFixed(0)
     : 0;
-
-  const { getTripStatus } = require('@/utils/dateUtils');
-  const tripStatus = getTripStatus(trip.startDate, trip.endDate);
+const tripStatus = getTripStatus(trip.startDate, trip.endDate);
 
   return (
     <motion.div
