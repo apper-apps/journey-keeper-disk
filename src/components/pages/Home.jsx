@@ -63,7 +63,7 @@ if (trips.length > 0) {
   if (error) return <Error message={error} onRetry={loadTrips} />;
 
   return (
-<div className="min-h-screen bg-gray-50 pb-20">
+<div className="min-h-screen bg-gray-50 pb-32">
       <div className="bg-gradient-to-r from-primary-600 to-secondary-600 text-white">
         <div className="px-6 py-8">
           <div className="flex items-center justify-between">

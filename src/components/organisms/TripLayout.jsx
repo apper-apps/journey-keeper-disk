@@ -38,7 +38,7 @@ const TripLayout = () => {
   if (!trip) return <Error message="Trip not found" />;
 
 return (
-    <div className="min-h-screen bg-gray-50 pb-24">
+    <div className="min-h-screen bg-gray-50 pb-36">
       <TripHeader trip={trip} />
       <div className="flex-1">
         <Outlet context={{ trip }} />
