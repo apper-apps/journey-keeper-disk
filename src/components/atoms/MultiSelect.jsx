@@ -86,7 +86,7 @@ const MultiSelect = ({ value = [], onChange, placeholder = "Select countries..."
           </span>
         ))}
 <input
-          ref={inputRef}
+ref={inputRef}
           type="text"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
@@ -96,7 +96,7 @@ const MultiSelect = ({ value = [], onChange, placeholder = "Select countries..."
             "text-red-900": error
           })}
           onFocus={() => setIsOpen(true)}
-          required={required}
+          required={required && value.length === 0}
           {...props}
         />
       </div>
