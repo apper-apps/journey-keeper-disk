@@ -343,7 +343,7 @@ const handleFlightLookup = async () => {
               placeholder="Confirmation code"
             />
 
-            <div className="flex space-x-3 pt-6">
+<div className="flex space-x-3 pt-6">
               <Button
                 type="button"
                 variant="outline"
@@ -357,7 +357,7 @@ const handleFlightLookup = async () => {
                 className="flex-1"
                 disabled={loading}
               >
-                {loading ? "Saving..." : flight ? "Update Flight" : "Add Flight"}
+                {loading ? "Saving..." : "Save Flight"}
               </Button>
             </div>
           </form>
