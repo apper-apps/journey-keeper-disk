@@ -61,7 +61,22 @@ export const getTripStatus = (startDate, endDate) => {
 
 export const sortTripsByStatus = (trips) => {
   const today = new Date();
-  
+export const formatTimeForInput = (dateString) => {
+  if (!dateString) return "";
+  const date = typeof dateString === 'string' ? parseISO(dateString) : dateString;
+  return format(date, 'HH:mm');
+};
+
+export const formatDateForInput = (dateString) => {
+  if (!dateString) return "";
+  const date = typeof dateString === 'string' ? parseISO(dateString) : dateString;
+  return format(date, 'yyyy-MM-dd');
+};
+
+export const combineDateAndTime = (dateString, timeString) => {
+  if (!dateString || !timeString) return null;
+  return new Date(`${dateString}T${timeString}:00`);
+};
   return [...trips].sort((a, b) => {
     const statusA = getTripStatus(a.startDate, a.endDate);
     const statusB = getTripStatus(b.startDate, b.endDate);
