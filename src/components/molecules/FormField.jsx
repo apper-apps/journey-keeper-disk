@@ -9,11 +9,12 @@ const FormField = ({
   error, 
   required = false,
   options = [],
+  suggestions = [],
   className,
   children,
   ...props 
 }) => {
-  const renderField = () => {
+const renderField = () => {
     if (type === "select") {
       return (
         <Select error={error} {...props}>
@@ -26,12 +27,23 @@ const FormField = ({
       );
     } else if (type === "textarea") {
       return <Textarea error={error} {...props} />;
-} else if (children) {
-return children;
-} else {
-return <Input type={type} error={error} {...props} />;
-}
-};
+    } else if (suggestions.length > 0) {
+      return (
+        <div className="relative">
+          <Input type={type} error={error} list={`${props.name}-suggestions`} {...props} />
+          <datalist id={`${props.name}-suggestions`}>
+            {suggestions.map((suggestion, index) => (
+              <option key={index} value={suggestion} />
+            ))}
+          </datalist>
+        </div>
+      );
+    } else if (children) {
+      return children;
+    } else {
+      return <Input type={type} error={error} {...props} />;
+    }
+  };
 
   return (
     <div className={cn("space-y-2", className)}>

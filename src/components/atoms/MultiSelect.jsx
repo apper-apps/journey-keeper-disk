@@ -15,6 +15,14 @@ const countries = [
   "Thailand", "Turkey", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Vietnam"
 ];
 
+export const cities = [
+  "New York", "London", "Paris", "Tokyo", "Sydney", "Los Angeles", "Berlin", "Rome", "Barcelona", "Amsterdam",
+  "Dubai", "Singapore", "Bangkok", "Istanbul", "Moscow", "Toronto", "Mumbai", "Hong Kong", "Seoul", "Vienna",
+  "Prague", "Budapest", "Warsaw", "Stockholm", "Copenhagen", "Oslo", "Helsinki", "Dublin", "Edinburgh", "Lisbon",
+  "Madrid", "Milan", "Venice", "Florence", "Athens", "Cairo", "Marrakech", "Cape Town", "Buenos Aires", "Rio de Janeiro",
+  "Mexico City", "Vancouver", "Montreal", "San Francisco", "Las Vegas", "Miami", "Chicago", "Boston", "Washington DC"
+];
+
 const MultiSelect = ({ value = [], onChange, placeholder = "Select countries...", className, required = false, error = false, ...props }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");

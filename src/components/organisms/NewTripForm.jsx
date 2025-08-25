@@ -54,8 +54,8 @@ const { name, value } = e.target;
 setFormData(prev => ({ ...prev, [name]: value }));
 };
 
-const handleDestinationChange = (countries) => {
-setFormData(prev => ({ ...prev, destination: countries }));
+const handleDestinationChange = (destinations) => {
+setFormData(prev => ({ ...prev, destination: destinations }));
 };
 
 const handleFileChange = (file) => {

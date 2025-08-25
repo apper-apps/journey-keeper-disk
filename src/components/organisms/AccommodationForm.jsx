@@ -5,13 +5,16 @@ import FormField from "@/components/molecules/FormField";
 import Button from "@/components/atoms/Button";
 import { accommodationService } from "@/services/api/accommodationService";
 import { calculateNights } from "@/utils/dateUtils";
+import { cities } from "@/components/atoms/MultiSelect";
 
 const AccommodationForm = ({ tripId, accommodation, onSave, onCancel }) => {
-  const [formData, setFormData] = useState({
+const [formData, setFormData] = useState({
     name: accommodation?.name || "",
     location: accommodation?.location || "",
-    checkIn: accommodation?.checkIn?.slice(0, 16) || "",
-    checkOut: accommodation?.checkOut?.slice(0, 16) || "",
+    checkInDate: accommodation?.checkIn ? accommodation.checkIn.slice(0, 10) : "",
+    checkInTime: accommodation?.checkIn ? accommodation.checkIn.slice(11, 16) : "",
+    checkOutDate: accommodation?.checkOut ? accommodation.checkOut.slice(0, 10) : "",
+    checkOutTime: accommodation?.checkOut ? accommodation.checkOut.slice(11, 16) : "",
     cost: accommodation?.cost || "",
     status: accommodation?.status || "pending",
     bookingPlatform: accommodation?.bookingPlatform || "",
@@ -19,20 +22,43 @@ const AccommodationForm = ({ tripId, accommodation, onSave, onCancel }) => {
     websiteUrl: accommodation?.websiteUrl || ""
   });
 
+  const hotelSuggestions = [
+    "Marriott", "Hilton", "Hyatt", "InterContinental", "Four Seasons", "Ritz-Carlton", "Sheraton", 
+    "Westin", "W Hotel", "Renaissance", "Courtyard by Marriott", "Hampton Inn", "Holiday Inn",
+    "Crowne Plaza", "Radisson", "Best Western", "Accor", "Novotel", "Ibis", "Sofitel",
+    "Le Meridien", "JW Marriott", "St. Regis", "Luxury Collection", "Autograph Collection",
+    "Kimpton", "Thompson Hotels", "1 Hotels", "Edition Hotels", "Aman Hotels"
+  ];
+
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e) => {
+const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       setLoading(true);
       
-      const checkInDate = new Date(formData.checkIn);
-      const checkOutDate = new Date(formData.checkOut);
+      // Combine date and time for check-in
+      const checkInDateTime = formData.checkInTime 
+        ? `${formData.checkInDate}T${formData.checkInTime}:00`
+        : `${formData.checkInDate}T15:00:00`; // Default 3 PM
+      
+      // Combine date and time for check-out  
+      const checkOutDateTime = formData.checkOutTime
+        ? `${formData.checkOutDate}T${formData.checkOutTime}:00`
+        : `${formData.checkOutDate}T11:00:00`; // Default 11 AM
+      
+      const checkInDate = new Date(checkInDateTime);
+      const checkOutDate = new Date(checkOutDateTime);
       
       const accommodationData = {
-        ...formData,
-        tripId: tripId,
+        name: formData.name,
+        location: formData.location,
         cost: parseFloat(formData.cost) || 0,
+        status: formData.status,
+        bookingPlatform: formData.bookingPlatform,
+        bookingReference: formData.bookingReference,
+        websiteUrl: formData.websiteUrl,
+        tripId: tripId,
         checkIn: checkInDate.toISOString(),
         checkOut: checkOutDate.toISOString(),
         nights: calculateNights(checkInDate, checkOutDate)
@@ -48,6 +74,7 @@ const AccommodationForm = ({ tripId, accommodation, onSave, onCancel }) => {
       
       onSave();
     } catch (error) {
+      console.error("Save error:", error);
       toast.error("Failed to save accommodation");
     } finally {
       setLoading(false);
@@ -87,6 +114,8 @@ const AccommodationForm = ({ tripId, accommodation, onSave, onCancel }) => {
               name="name"
               value={formData.name}
               onChange={handleChange}
+              suggestions={hotelSuggestions}
+              placeholder="e.g., Marriott, Hilton, or enter custom name"
               required
             />
 
@@ -95,27 +124,49 @@ const AccommodationForm = ({ tripId, accommodation, onSave, onCancel }) => {
               name="location"
               value={formData.location}
               onChange={handleChange}
+              suggestions={cities}
               placeholder="City, Area"
               required
             />
 
-            <div className="grid grid-cols-2 gap-4">
-              <FormField
-                label="Check-in"
-                name="checkIn"
-                type="datetime-local"
-                value={formData.checkIn}
-                onChange={handleChange}
-                required
-              />
-              <FormField
-                label="Check-out"
-                name="checkOut"
-                type="datetime-local"
-                value={formData.checkOut}
-                onChange={handleChange}
-                required
-              />
+<div className="space-y-4">
+              <div className="grid grid-cols-2 gap-4">
+                <FormField
+                  label="Check-in Date"
+                  name="checkInDate"
+                  type="date"
+                  value={formData.checkInDate}
+                  onChange={handleChange}
+                  required
+                />
+                <FormField
+                  label="Check-out Date"
+                  name="checkOutDate"
+                  type="date"
+                  value={formData.checkOutDate}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              
+              <div className="grid grid-cols-2 gap-4">
+                <FormField
+                  label="Check-in Time (Optional)"
+                  name="checkInTime"
+                  type="time"
+                  value={formData.checkInTime}
+                  onChange={handleChange}
+                  placeholder="Default: 3:00 PM"
+                />
+                <FormField
+                  label="Check-out Time (Optional)"
+                  name="checkOutTime"
+                  type="time"
+                  value={formData.checkOutTime}
+                  onChange={handleChange}
+                  placeholder="Default: 11:00 AM"
+                />
+              </div>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
