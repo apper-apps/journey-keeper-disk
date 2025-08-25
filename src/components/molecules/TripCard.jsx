@@ -16,10 +16,21 @@ const TripCard = ({ trip }) => {
       whileTap={{ scale: 0.98 }}
       onClick={() => navigate(`/trip/${trip.Id}`)}
     >
-      <div 
-        className="h-48 bg-cover bg-center relative"
-        style={{ backgroundImage: `url(${trip.coverImage})` }}
-      >
+<div className="h-48 bg-gradient-to-br from-primary-400 to-secondary-500 relative overflow-hidden">
+        {trip.coverImage && (
+          <img
+            src={trip.coverImage}
+            alt={trip.name}
+            className="absolute inset-0 w-full h-full object-cover"
+            onError={(e) => {
+              e.target.style.display = 'none';
+            }}
+            onLoad={(e) => {
+              e.target.style.opacity = '1';
+            }}
+            style={{ opacity: 0, transition: 'opacity 0.3s ease-in-out' }}
+          />
+        )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-black/20" />
         <div className="absolute bottom-4 left-4 text-white">
           <h3 className="text-xl font-bold font-display">{trip.name}</h3>
