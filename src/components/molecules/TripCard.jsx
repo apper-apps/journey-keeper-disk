@@ -1,37 +1,64 @@
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import ApperIcon from "@/components/ApperIcon";
+import React from "react";
+import { formatCurrency, getStatusColor } from "@/utils/formatUtils";
 import { formatDate, getTripDuration } from "@/utils/dateUtils";
-import { formatCurrency } from "@/utils/formatUtils";
+import ApperIcon from "@/components/ApperIcon";
+import Budget from "@/components/pages/Budget";
 
 const TripCard = ({ trip }) => {
   const navigate = useNavigate();
+
+  const getStatusColor = (status) => {
+    switch (status) {
+      case "Current Trip":
+        return "bg-green-100 text-green-800 border-green-200";
+      case "Active Trip":
+        return "bg-blue-100 text-blue-800 border-blue-200";
+      case "Future Trip":
+        return "bg-purple-100 text-purple-800 border-purple-200";
+      case "Past Trip":
+        return "bg-gray-100 text-gray-800 border-gray-200";
+      default:
+        return "bg-gray-100 text-gray-800 border-gray-200";
+    }
+  };
+
+  const handleClick = () => {
+    navigate(`/trip/${trip.Id}/calendar`);
+  };
+
   const duration = getTripDuration(trip.startDate, trip.endDate);
-  const budgetProgress = trip.totalBudget > 0 ? (trip.actualSpent / trip.totalBudget) * 100 : 0;
+  const budgetUsed = trip.actualSpent > 0 
+    ? ((trip.actualSpent / trip.totalBudget) * 100).toFixed(0)
+    : 0;
+
+  const { getTripStatus } = require('@/utils/dateUtils');
+  const tripStatus = getTripStatus(trip.startDate, trip.endDate);
 
   return (
     <motion.div
-      className="card-premium cursor-pointer hover:shadow-premium transition-all duration-300"
-      whileHover={{ y: -4, scale: 1.02 }}
+      className="card-premium cursor-pointer group hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+      onClick={handleClick}
+      whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
-      onClick={() => navigate(`/trip/${trip.Id}`)}
     >
-<div className="h-48 bg-gradient-to-br from-primary-400 to-secondary-500 relative overflow-hidden">
-        {trip.coverImage && (
-          <img
-            src={trip.coverImage}
-            alt={trip.name}
-            className="absolute inset-0 w-full h-full object-cover"
-            onError={(e) => {
-              e.target.style.display = 'none';
-            }}
-            onLoad={(e) => {
-              e.target.style.opacity = '1';
-            }}
-            style={{ opacity: 0, transition: 'opacity 0.3s ease-in-out' }}
-          />
-        )}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-black/20" />
+      <div className="relative h-48 overflow-hidden">
+        <img
+          src={trip.coverImage}
+          alt={trip.name}
+          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+        
+        {/* Status badge */}
+        <div className="absolute top-4 right-4">
+          <span className={`px-3 py-1 rounded-full text-sm font-medium border ${getStatusColor(tripStatus)}`}>
+            {tripStatus}
+          </span>
+        </div>
+        
+        {/* Trip info overlay */}
         <div className="absolute bottom-4 left-4 text-white">
           <h3 className="text-xl font-bold font-display">{trip.name}</h3>
           <p className="text-white/90 flex items-center">
@@ -64,14 +91,14 @@ const TripCard = ({ trip }) => {
           <div className="text-right">
             <p className="text-sm text-gray-600">Progress</p>
             <div className="flex items-center space-x-2">
-              <div className="w-16 h-2 bg-gray-200 rounded-full overflow-hidden">
+<div className="w-16 h-2 bg-gray-200 rounded-full overflow-hidden">
                 <div 
                   className="h-full bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full transition-all duration-300"
-                  style={{ width: `${Math.min(budgetProgress, 100)}%` }}
+                  style={{ width: `${Math.min(budgetUsed, 100)}%` }}
                 />
               </div>
               <span className="text-sm font-medium text-gray-700">
-                {Math.round(budgetProgress)}%
+                {Math.round(budgetUsed)}%
               </span>
             </div>
           </div>

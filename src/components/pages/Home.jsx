@@ -1,28 +1,31 @@
-import { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { toast } from "react-toastify";
+import { tripService } from "@/services/api/tripService";
 import ApperIcon from "@/components/ApperIcon";
 import TripCard from "@/components/molecules/TripCard";
 import NewTripForm from "@/components/organisms/NewTripForm";
-import Loading from "@/components/ui/Loading";
 import Error from "@/components/ui/Error";
 import Empty from "@/components/ui/Empty";
-import { tripService } from "@/services/api/tripService";
+import Loading from "@/components/ui/Loading";
 
 const Home = () => {
   const [trips, setTrips] = useState([]);
+  const [sortedTrips, setSortedTrips] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-  const [showNewTripForm, setShowNewTripForm] = useState(false);
+  const [error, setError] = useState(null);
+const [showNewTripForm, setShowNewTripForm] = useState(false);
 
   const loadTrips = async () => {
     try {
       setLoading(true);
-      setError("");
+      setError(null);
       const data = await tripService.getAll();
       setTrips(data);
     } catch (err) {
       setError("Failed to load trips");
+      console.error("Error loading trips:", err);
+      toast.error("Failed to load trips");
     } finally {
       setLoading(false);
     }
@@ -32,15 +35,30 @@ const Home = () => {
     loadTrips();
   }, []);
 
+  useEffect(() => {
+    if (trips.length > 0) {
+      const { sortTripsByStatus } = require('@/utils/dateUtils');
+      setSortedTrips(sortTripsByStatus(trips));
+    } else {
+      setSortedTrips([]);
+    }
+  }, [trips]);
+
   const handleNewTrip = () => {
     setShowNewTripForm(true);
   };
 
-  const handleTripSaved = () => {
-    setShowNewTripForm(false);
-    loadTrips();
+  const handleTripSaved = async (newTrip) => {
+    try {
+      await tripService.create(newTrip);
+      toast.success("Trip created successfully!");
+      setShowNewTripForm(false);
+      await loadTrips();
+    } catch (err) {
+      console.error("Error creating trip:", err);
+      toast.error("Failed to create trip");
+    }
   };
-
   if (loading) return <Loading type="trips" />;
   if (error) return <Error message={error} onRetry={loadTrips} />;
 
@@ -65,18 +83,19 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="px-6 py-6">
-        {trips.length === 0 ? (
+<div className="px-6 py-6">
+        {sortedTrips.length === 0 ? (
           <Empty
-            icon="Compass"
             title="No trips planned yet"
-            description="Start planning your next adventure by creating your first trip"
-            actionLabel="Create Trip"
-            onAction={handleNewTrip}
+            description="Start planning your next adventure"
+            action={{
+              label: "Plan Your First Trip",
+              onClick: handleNewTrip,
+            }}
           />
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {trips.map((trip, index) => (
+          <div className="space-y-6">
+            {sortedTrips.map((trip, index) => (
               <motion.div
                 key={trip.Id}
                 initial={{ opacity: 0, y: 20 }}
