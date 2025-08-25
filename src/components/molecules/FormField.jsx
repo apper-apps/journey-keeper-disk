@@ -26,12 +26,12 @@ const FormField = ({
       );
     } else if (type === "textarea") {
       return <Textarea error={error} {...props} />;
-    } else if (children) {
-      return children;
-    } else {
-      return <Input type={type} error={error} {...props} />;
-    }
-  };
+} else if (children) {
+return children;
+} else {
+return <Input type={type} error={error} {...props} />;
+}
+};
 
   return (
     <div className={cn("space-y-2", className)}>

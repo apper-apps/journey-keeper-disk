@@ -1,47 +1,58 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { toast } from "react-toastify";
+import MultiSelect from "@/components/atoms/MultiSelect";
+import FileUpload from "@/components/atoms/FileUpload";
+import { tripService } from "@/services/api/tripService";
 import FormField from "@/components/molecules/FormField";
 import Button from "@/components/atoms/Button";
-import { tripService } from "@/services/api/tripService";
 
 const NewTripForm = ({ onSave, onCancel }) => {
-  const [formData, setFormData] = useState({
-    name: "",
-    destination: "",
-    startDate: "",
-    endDate: "",
-    totalBudget: "",
-    coverImage: ""
-  });
+const [formData, setFormData] = useState({
+name: "",
+destination: [],
+startDate: "",
+endDate: "",
+totalBudget: "",
+coverImage: null
+});
 
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      setLoading(true);
-      
-      const tripData = {
-        ...formData,
-        totalBudget: parseFloat(formData.totalBudget) || 0,
-        coverImage: formData.coverImage || "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&h=600&fit=crop"
-      };
+const handleSubmit = async (e) => {
+e.preventDefault();
+try {
+setLoading(true);
 
-      await tripService.create(tripData);
-      toast.success("Trip created successfully!");
-      onSave();
-    } catch (error) {
-      toast.error("Failed to create trip");
-    } finally {
-      setLoading(false);
-    }
-  };
+const tripData = {
+...formData,
+destination: formData.destination.join(", "),
+totalBudget: parseFloat(formData.totalBudget) || 0,
+coverImage: formData.coverImage ? URL.createObjectURL(formData.coverImage) : "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&h=600&fit=crop"
+};
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
+await tripService.create(tripData);
+toast.success("Trip created successfully!");
+onSave();
+} catch (error) {
+toast.error("Failed to create trip");
+} finally {
+setLoading(false);
+}
+};
+
+const handleChange = (e) => {
+const { name, value } = e.target;
+setFormData(prev => ({ ...prev, [name]: value }));
+};
+
+const handleDestinationChange = (countries) => {
+setFormData(prev => ({ ...prev, destination: countries }));
+};
+
+const handleFileChange = (file) => {
+setFormData(prev => ({ ...prev, coverImage: file }));
+};
 
   return (
     <motion.div
@@ -74,15 +85,27 @@ const NewTripForm = ({ onSave, onCancel }) => {
             />
 
             <FormField
-              label="Destination"
-              name="destination"
-              value={formData.destination}
-              onChange={handleChange}
-              placeholder="e.g., Paris, France"
-              required
-            />
+label="Destination"
+required
+>
+<MultiSelect
+value={formData.destination}
+onChange={handleDestinationChange}
+placeholder="Search and select countries..."
+required
+/>
+</FormField>
 
-            <div className="grid grid-cols-2 gap-4">
+<FormField
+label="Start Date"
+name="startDate"
+type="date"
+value={formData.startDate}
+onChange={handleChange}
+required
+/>
+
+<div className="grid grid-cols-2 gap-4">
               <FormField
                 label="Start Date"
                 name="startDate"
@@ -102,7 +125,7 @@ const NewTripForm = ({ onSave, onCancel }) => {
             </div>
 
             <FormField
-              label="Total Budget"
+              label="Planned Budget"
               name="totalBudget"
               type="number"
               value={formData.totalBudget}
@@ -111,14 +134,14 @@ const NewTripForm = ({ onSave, onCancel }) => {
               required
             />
 
-            <FormField
-              label="Cover Image URL"
-              name="coverImage"
-              type="url"
-              value={formData.coverImage}
-              onChange={handleChange}
-              placeholder="https://... (optional)"
-            />
+<FormField label="Cover Image">
+<FileUpload
+value={formData.coverImage}
+onChange={handleFileChange}
+accept="image/*"
+placeholder="Upload a cover image for your trip"
+/>
+</FormField>
 
             <div className="flex space-x-3 pt-6">
               <Button
