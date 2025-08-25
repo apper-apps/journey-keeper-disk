@@ -1,0 +1,67 @@
+[
+  {
+    "Id": 1,
+    "tripId": "1",
+    "name": "Louvre Museum Skip-the-Line Tour",
+    "location": "Louvre Museum, Paris",
+    "date": "2024-04-17",
+    "duration": "3 hours",
+    "cost": 85,
+    "status": "paid",
+    "bookingPlatform": "GetYourGuide",
+    "websiteUrl": "https://getyourguide.com/louvre-tour",
+    "notes": "Meet at main entrance at 9:00 AM"
+  },
+  {
+    "Id": 2,
+    "tripId": "1",
+    "name": "Seine River Cruise",
+    "location": "Seine River, Paris",
+    "date": "2024-04-18",
+    "duration": "1.5 hours",
+    "cost": 45,
+    "status": "paid",
+    "bookingPlatform": "Viator",
+    "websiteUrl": "https://viator.com/seine-cruise",
+    "notes": "Evening cruise with dinner option"
+  },
+  {
+    "Id": 3,
+    "tripId": "1",
+    "name": "Château de Chambord Visit",
+    "location": "Loire Valley, France",
+    "date": "2024-04-22",
+    "duration": "4 hours",
+    "cost": 120,
+    "status": "booked",
+    "bookingPlatform": "Direct",
+    "websiteUrl": "https://chambord.org",
+    "notes": "Includes guided tour and gardens"
+  },
+  {
+    "Id": 4,
+    "tripId": "2",
+    "name": "Tsukiji Fish Market Tour",
+    "location": "Tsukiji, Tokyo",
+    "date": "2024-06-12",
+    "duration": "2 hours",
+    "cost": 75,
+    "status": "pending",
+    "bookingPlatform": "Klook",
+    "websiteUrl": "https://klook.com/tsukiji-tour",
+    "notes": "Early morning tour starting 5:30 AM"
+  },
+  {
+    "Id": 5,
+    "tripId": "2",
+    "name": "Mount Fuji Day Trip",
+    "location": "Mount Fuji, Japan",
+    "date": "2024-06-15",
+    "duration": "8 hours",
+    "cost": 180,
+    "status": "pending",
+    "bookingPlatform": "JTB",
+    "websiteUrl": "https://jtb.com/fuji-tour",
+    "notes": "Bus tour with lunch included"
+  }
+]

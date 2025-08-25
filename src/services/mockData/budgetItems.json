@@ -1,0 +1,62 @@
+[
+  {
+    "Id": 1,
+    "tripId": "1",
+    "category": "flights",
+    "description": "Round-trip flights to Paris",
+    "estimatedCost": 1800,
+    "actualCost": 1770,
+    "isPaid": true,
+    "date": "2024-04-15"
+  },
+  {
+    "Id": 2,
+    "tripId": "1",
+    "category": "accommodation",
+    "description": "Hotels in Paris and Lyon",
+    "estimatedCost": 2000,
+    "actualCost": 2000,
+    "isPaid": true,
+    "date": "2024-04-16"
+  },
+  {
+    "Id": 3,
+    "tripId": "1",
+    "category": "activities",
+    "description": "Tours and attractions",
+    "estimatedCost": 300,
+    "actualCost": 250,
+    "isPaid": true,
+    "date": "2024-04-17"
+  },
+  {
+    "Id": 4,
+    "tripId": "1",
+    "category": "food",
+    "description": "Meals and dining",
+    "estimatedCost": 400,
+    "actualCost": 180,
+    "isPaid": false,
+    "date": "2024-04-16"
+  },
+  {
+    "Id": 5,
+    "tripId": "2",
+    "category": "flights",
+    "description": "Round-trip flights to Tokyo",
+    "estimatedCost": 1400,
+    "actualCost": 1200,
+    "isPaid": true,
+    "date": "2024-06-10"
+  },
+  {
+    "Id": 6,
+    "tripId": "2",
+    "category": "accommodation",
+    "description": "Park Hyatt Tokyo",
+    "estimatedCost": 2500,
+    "actualCost": 2400,
+    "isPaid": true,
+    "date": "2024-06-11"
+  }
+]

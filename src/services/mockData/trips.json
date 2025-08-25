@@ -1,0 +1,35 @@
+[
+  {
+    "Id": 1,
+    "name": "European Adventure 2024",
+    "destination": "Paris, France",
+    "startDate": "2024-04-15",
+    "endDate": "2024-04-25",
+    "totalBudget": 4500,
+    "actualSpent": 3200,
+    "currency": "USD",
+    "coverImage": "https://images.unsplash.com/photo-1502602898536-47ad22581b52?w=800&h=600&fit=crop"
+  },
+  {
+    "Id": 2,
+    "name": "Tokyo Discovery",
+    "destination": "Tokyo, Japan",
+    "startDate": "2024-06-10",
+    "endDate": "2024-06-20",
+    "totalBudget": 5200,
+    "actualSpent": 1800,
+    "currency": "USD",
+    "coverImage": "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800&h=600&fit=crop"
+  },
+  {
+    "Id": 3,
+    "name": "Mediterranean Cruise",
+    "destination": "Barcelona, Spain",
+    "startDate": "2024-08-05",
+    "endDate": "2024-08-15",
+    "totalBudget": 6800,
+    "actualSpent": 0,
+    "currency": "USD",
+    "coverImage": "https://images.unsplash.com/photo-1583422409516-2895a77efded?w=800&h=600&fit=crop"
+  }
+]

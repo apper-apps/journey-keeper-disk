@@ -1,0 +1,44 @@
+[
+  {
+    "Id": 1,
+    "tripId": "1",
+    "airline": "Air France",
+    "flightNumber": "AF83",
+    "departureAirport": "JFK",
+    "arrivalAirport": "CDG",
+    "departureTime": "2024-04-15T20:30:00",
+    "arrivalTime": "2024-04-16T09:45:00",
+    "cost": 850,
+    "status": "paid",
+    "luggageAllowance": "2 checked bags",
+    "bookingReference": "AF123456"
+  },
+  {
+    "Id": 2,
+    "tripId": "1",
+    "airline": "Air France",
+    "flightNumber": "AF82",
+    "departureAirport": "CDG",
+    "arrivalAirport": "JFK",
+    "departureTime": "2024-04-25T11:15:00",
+    "arrivalTime": "2024-04-25T14:30:00",
+    "cost": 920,
+    "status": "paid",
+    "luggageAllowance": "2 checked bags",
+    "bookingReference": "AF123457"
+  },
+  {
+    "Id": 3,
+    "tripId": "2",
+    "airline": "Japan Airlines",
+    "flightNumber": "JL5",
+    "departureAirport": "LAX",
+    "arrivalAirport": "NRT",
+    "departureTime": "2024-06-10T11:50:00",
+    "arrivalTime": "2024-06-11T15:20:00",
+    "cost": 1200,
+    "status": "booked",
+    "luggageAllowance": "2 checked bags",
+    "bookingReference": "JL789012"
+  }
+]

@@ -1,0 +1,44 @@
+[
+  {
+    "Id": 1,
+    "tripId": "1",
+    "name": "Hotel des Grands Boulevards",
+    "location": "2nd Arrondissement, Paris",
+    "checkIn": "2024-04-16T15:00:00",
+    "checkOut": "2024-04-20T11:00:00",
+    "nights": 4,
+    "cost": 1200,
+    "status": "paid",
+    "bookingPlatform": "Booking.com",
+    "bookingReference": "BK987654",
+    "websiteUrl": "https://booking.com/hotel-des-grands-boulevards"
+  },
+  {
+    "Id": 2,
+    "tripId": "1",
+    "name": "Villa Provence",
+    "location": "Lyon, France",
+    "checkIn": "2024-04-20T16:00:00",
+    "checkOut": "2024-04-24T10:00:00",
+    "nights": 4,
+    "cost": 800,
+    "status": "paid",
+    "bookingPlatform": "Airbnb",
+    "bookingReference": "AB123789",
+    "websiteUrl": "https://airbnb.com/villa-provence"
+  },
+  {
+    "Id": 3,
+    "tripId": "2",
+    "name": "Park Hyatt Tokyo",
+    "location": "Shinjuku, Tokyo",
+    "checkIn": "2024-06-11T15:00:00",
+    "checkOut": "2024-06-19T12:00:00",
+    "nights": 8,
+    "cost": 2400,
+    "status": "booked",
+    "bookingPlatform": "Hyatt.com",
+    "bookingReference": "HY456123",
+    "websiteUrl": "https://hyatt.com/park-hyatt-tokyo"
+  }
+]
