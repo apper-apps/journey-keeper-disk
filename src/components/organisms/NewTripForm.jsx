@@ -125,13 +125,14 @@ error={!!errors.destination}
               />
             </div>
 
-            <FormField
+<FormField
               label="Planned Budget"
               name="totalBudget"
               type="number"
               value={formData.totalBudget}
               onChange={handleChange}
               placeholder="0.00"
+              prefix="$"
               required
             />
 
