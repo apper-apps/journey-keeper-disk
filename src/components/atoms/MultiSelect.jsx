@@ -15,7 +15,7 @@ const countries = [
   "Thailand", "Turkey", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Vietnam"
 ];
 
-const MultiSelect = ({ value = [], onChange, placeholder = "Select countries...", className, ...props }) => {
+const MultiSelect = ({ value = [], onChange, placeholder = "Select countries...", className, required = false, error = false, ...props }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const containerRef = useRef(null);
@@ -85,15 +85,18 @@ const MultiSelect = ({ value = [], onChange, placeholder = "Select countries..."
             </button>
           </span>
         ))}
-        <input
+<input
           ref={inputRef}
           type="text"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder={value.length === 0 ? placeholder : ""}
-          className="flex-1 min-w-[120px] outline-none bg-transparent"
+          className={cn("flex-1 min-w-[120px] outline-none bg-transparent", {
+            "text-red-900": error
+          })}
           onFocus={() => setIsOpen(true)}
+          required={required}
           {...props}
         />
       </div>

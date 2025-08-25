@@ -18,9 +18,17 @@ coverImage: null
 });
 
   const [loading, setLoading] = useState(false);
-
+  const [errors, setErrors] = useState({});
 const handleSubmit = async (e) => {
 e.preventDefault();
+setErrors({});
+
+// Validate destinations
+if (!formData.destination || formData.destination.length === 0) {
+  setErrors({ destination: "Please select at least one destination" });
+  return;
+}
+
 try {
 setLoading(true);
 
@@ -84,26 +92,19 @@ setFormData(prev => ({ ...prev, coverImage: file }));
               required
             />
 
-            <FormField
+<FormField
 label="Destination"
 required
+error={errors.destination}
 >
 <MultiSelect
 value={formData.destination}
 onChange={handleDestinationChange}
 placeholder="Search and select countries..."
 required
+error={!!errors.destination}
 />
 </FormField>
-
-<FormField
-label="Start Date"
-name="startDate"
-type="date"
-value={formData.startDate}
-onChange={handleChange}
-required
-/>
 
 <div className="grid grid-cols-2 gap-4">
               <FormField
