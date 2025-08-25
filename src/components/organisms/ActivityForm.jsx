@@ -159,9 +159,7 @@ const ActivityForm = ({ tripId, activity, onSave, onCancel }) => {
               onChange={handleChange}
               placeholder="Special instructions, meeting points, etc."
               rows={3}
-            />
 />
-
             <div className="sticky bottom-0 bg-white border-t border-gray-200 pt-4 mt-6 -mx-6 px-6 pb-6">
               <div className="flex space-x-3">
                 <Button

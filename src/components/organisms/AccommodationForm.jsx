@@ -166,9 +166,7 @@ const AccommodationForm = ({ tripId, accommodation, onSave, onCancel }) => {
               value={formData.websiteUrl}
               onChange={handleChange}
               placeholder="https://..."
-            />
 />
-
             <div className="sticky bottom-0 bg-white border-t border-gray-200 pt-4 mt-6 -mx-6 px-6 pb-6">
               <div className="flex space-x-3">
                 <Button
