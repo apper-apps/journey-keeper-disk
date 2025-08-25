@@ -9,9 +9,9 @@ import Map from "@/components/pages/Map";
 import Budget from "@/components/pages/Budget";
 
 function App() {
-  return (
+return (
     <BrowserRouter>
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-50 pb-20">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/trip/:tripId" element={<TripLayout />}>

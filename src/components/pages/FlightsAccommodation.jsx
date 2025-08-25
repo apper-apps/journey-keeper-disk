@@ -94,9 +94,8 @@ const FlightsAccommodation = () => {
 
   if (loading) return <Loading type="list" />;
   if (error) return <Error message={error} onRetry={loadData} />;
-
-  return (
-    <div className="p-6 space-y-8">
+return (
+    <div className="p-6 pb-24 space-y-8">
       {/* Flights Section */}
       <div>
         <div className="flex items-center justify-between mb-6">

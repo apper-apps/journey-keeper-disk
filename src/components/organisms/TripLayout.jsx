@@ -37,8 +37,8 @@ const TripLayout = () => {
   if (error) return <Error message={error} onRetry={loadTrip} />;
   if (!trip) return <Error message="Trip not found" />;
 
-  return (
-    <div className="min-h-screen bg-gray-50 pb-20">
+return (
+    <div className="min-h-screen bg-gray-50 pb-24">
       <TripHeader trip={trip} />
       <div className="flex-1">
         <Outlet context={{ trip }} />

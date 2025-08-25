@@ -179,8 +179,8 @@ const Budget = () => {
   if (loading) return <Loading />;
   if (error) return <Error message={error} onRetry={loadBudgetData} />;
 
-  return (
-    <div className="p-6 space-y-6">
+return (
+    <div className="p-6 pb-24 space-y-6">
       <div className="flex items-center space-x-3">
         <div className="w-10 h-10 bg-gradient-to-r from-green-500 to-green-600 rounded-lg flex items-center justify-center">
           <ApperIcon name="DollarSign" size={20} className="text-white" />

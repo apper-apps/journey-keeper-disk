@@ -339,13 +339,10 @@ const handleFlightLookup = async () => {
               label="Booking Reference"
               name="bookingReference"
               value={formData.bookingReference}
-              onChange={handleChange}
+onChange={handleChange}
               placeholder="Confirmation code"
 />
-<div className="pb-20">
-              {/* Form content padding to ensure buttons are fully visible */}
-            </div>
-            <div className="sticky bottom-0 bg-white border-t border-gray-200 pt-4 mt-6 -mx-6 px-6 pb-6">
+            <div className="sticky bottom-0 bg-white border-t border-gray-200 pt-4 mt-6 mb-4 -mx-6 px-6 pb-6">
               <div className="flex space-x-3">
                 <Button
                   type="button"
