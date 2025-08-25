@@ -81,7 +81,7 @@ const AccommodationForm = ({ tripId, accommodation, onSave, onCancel }) => {
             </Button>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+<form onSubmit={handleSubmit} className="space-y-4 pb-8">
             <FormField
               label="Hotel/Property Name"
               name="name"
@@ -167,7 +167,7 @@ const AccommodationForm = ({ tripId, accommodation, onSave, onCancel }) => {
 onChange={handleChange}
               placeholder="https://..."
 />
-            <div className="sticky bottom-0 bg-white border-t border-gray-200 pt-4 mt-6 mb-4 -mx-6 px-6 pb-6">
+<div className="sticky bottom-0 bg-white border-t border-gray-200 pt-4 mt-6 mb-8 -mx-6 px-6 pb-8">
               <div className="flex space-x-3">
                 <Button
                   type="button"

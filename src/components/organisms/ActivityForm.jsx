@@ -74,7 +74,7 @@ const ActivityForm = ({ tripId, activity, onSave, onCancel }) => {
             </Button>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+<form onSubmit={handleSubmit} className="space-y-4 pb-8">
             <FormField
               label="Activity Name"
               name="name"
