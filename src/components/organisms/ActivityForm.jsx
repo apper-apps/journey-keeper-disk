@@ -160,23 +160,26 @@ const ActivityForm = ({ tripId, activity, onSave, onCancel }) => {
               placeholder="Special instructions, meeting points, etc."
               rows={3}
             />
+/>
 
-            <div className="flex space-x-3 pt-6">
-              <Button
-                type="button"
-                variant="outline"
-                onClick={onCancel}
-                className="flex-1"
-              >
-                Cancel
-              </Button>
-              <Button
-                type="submit"
-                className="flex-1"
-                disabled={loading}
-              >
-                {loading ? "Saving..." : activity ? "Update Activity" : "Add Activity"}
-              </Button>
+            <div className="sticky bottom-0 bg-white border-t border-gray-200 pt-4 mt-6 -mx-6 px-6 pb-6">
+              <div className="flex space-x-3">
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={onCancel}
+                  className="flex-1"
+                >
+                  Cancel
+                </Button>
+                <Button
+                  type="submit"
+                  className="flex-1"
+                  disabled={loading}
+                >
+                  {loading ? "Saving..." : activity ? "Update Activity" : "Add Activity"}
+                </Button>
+              </div>
             </div>
           </form>
         </div>
