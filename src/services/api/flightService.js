@@ -113,8 +113,8 @@ export const flightService = {
   },
 
   getByTripId: async (tripId) => {
-    await new Promise(resolve => setTimeout(resolve, 200));
-    return flights.filter(flight => flight.tripId === tripId.toString());
+await new Promise(resolve => setTimeout(resolve, 200));
+    return flights.filter(flight => flight.tripId === parseInt(tripId));
   },
 
   getById: async (id) => {
